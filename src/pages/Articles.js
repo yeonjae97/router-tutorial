@@ -1,20 +1,33 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
+
+
+const ArticlItem = ({id}) => {
+  const activeStyle = {
+    color: 'green',
+    fontSize: 21,
+  }
+  return (
+    <li>
+      <NavLink 
+        to={`/articles/${id}`}
+        style={({isActive}) => (isActive ? activeStyle : undefined)}
+        >
+          게시글 {id}
+      </NavLink>
+    </li>
+  )
+}
+
 
 const Articles = () => {
   return (
     <div>
       <Outlet />
       <ul>
-        <li>
-          <Link to="/articles/1">게시글 1</Link>
-        </li>
-        <li>
-          <Link to="/articles/2">게시글 2</Link>
-        </li>
-        <li>
-          <Link to="/articles/3">게시글 3</Link>
-        </li>  
+        <ArticlItem id={1} />
+        <ArticlItem id={2} />
+        <ArticlItem id={3} />
       </ul>
     </div>
   );
